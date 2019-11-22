@@ -53,5 +53,5 @@ workflows:
 
   build:
     jobs:
-      - format_check
+      - format_checks
       - sbt_tests
