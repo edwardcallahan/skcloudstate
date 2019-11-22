@@ -19,6 +19,8 @@ Cloudstate's reference implementation is leveraging [Knative](https://cloud.goog
 
 Join us in making this vision a reality!
 
+- Thank you
+
 ---
 ## Table of Contents
 
