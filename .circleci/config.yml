@@ -36,6 +36,7 @@ jobs:
     - checkout
     - setup_sbt
     - run: sbt scalafmtCheckAll scalafmtSbtCheck || { echo "[error] Code not formatted prior to commit. Run 'sbt scalafmtAll scalafmtSbt' then commit the reformatted code."; false; }
+    - save_sbt_cache
 
   sbt_tests:
     docker:
