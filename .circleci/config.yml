@@ -76,8 +76,17 @@ jobs:
     orbs:
       minikube: ccpgames/minikube@0.0.1
     steps:
-      run: ./bin/deploy-to-minikube.sh
-
+      run: |
+        name: Add Operator
+        command: |
+          kubectl create namespace cloudstate
+          kubectl apply -n cloudstate -f operator/cloudstate.yaml
+          if ! kubectl wait --for=condition=available --timeout=60s -n cloudstate deployment/cloudstate-operator
+          then
+              kubectl describe -n cloudstate deployment/cloudstate-operator
+              kubectl logs -l app=cloudstate-operator -n cloudstate
+              exit 1
+          fi
 
 workflows:
   version: 2
