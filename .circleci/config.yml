@@ -72,7 +72,7 @@ jobs:
       - run: cd docs/src/test/js && npm test && cd -
       - save_sbt_cache
 
-  minikube_tesst:
+  minikube_tests:
     orbs:
       minikube: ccpgames/minikube@0.0.1
     steps:
