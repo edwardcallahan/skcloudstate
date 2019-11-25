@@ -71,7 +71,7 @@ jobs:
 
   doc_npm_tests:
     docker:
-      -image: ayltai/circleci-openjdk-node
+      -image: ayltai/circleci-openjdk-node:jdk8-node10
     steps:
       - checkout
       - setup_npm
