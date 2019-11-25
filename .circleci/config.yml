@@ -28,6 +28,19 @@ commands:
           - "~/.m2"
           - "~/.coursier"
 
+  setup_npm:
+    description: "Set up npm"
+    steps:
+    - run:
+        name: Install nmp
+        command: |
+          cd node-support
+          npm install
+          cd ../samples/js-shopping-cart/
+          npm install
+          cd -
+
+
 jobs:
   format_checks:
     docker:
@@ -41,12 +54,20 @@ jobs:
   sbt_tests:
     docker:
       - image: circleci/openjdk:8
-
     steps:
       - checkout
       - setup_sbt
       - run: sbt test
       - save_sbt_cache
+
+  doc_tests:
+    docker:
+      - image: circleci/openjdk:8
+    steps:
+      - setup_npm
+      - sbt 'set concurrentRestrictions in Global += Tags.limitAll(1)' docs/paradox docs/test
+
+
 
 
 workflows:
@@ -54,4 +75,4 @@ workflows:
 
   build:
     jobs:
-      - sbt_tests
+      - doc_tests
