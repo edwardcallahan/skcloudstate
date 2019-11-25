@@ -78,15 +78,11 @@ jobs:
     steps:
       run: |
         name: Add Operator
-        command: |
-          kubectl create namespace cloudstate
-          kubectl apply -n cloudstate -f operator/cloudstate.yaml
-          if ! kubectl wait --for=condition=available --timeout=60s -n cloudstate deployment/cloudstate-operator
-          then
-              kubectl describe -n cloudstate deployment/cloudstate-operator
-              kubectl logs -l app=cloudstate-operator -n cloudstate
-              exit 1
-          fi
+        command: >-
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get |
+          bash &&
+          helm init --wait
+          name: Initialize Helm Tiller Service
 
 workflows:
   version: 2
