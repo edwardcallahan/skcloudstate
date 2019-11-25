@@ -69,9 +69,6 @@ jobs:
       - setup_npm
       - sbt 'set concurrentRestrictions in Global += Tags.limitAll(1)' docs/paradox docs/test
 
-
-
-
 workflows:
   version: 2
 
