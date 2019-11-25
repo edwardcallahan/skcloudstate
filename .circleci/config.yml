@@ -64,6 +64,8 @@ jobs:
     docker:
       - image: circleci/openjdk:8
     steps:
+      - checkout
+      - setup_sbt
       - setup_npm
       - sbt 'set concurrentRestrictions in Global += Tags.limitAll(1)' docs/paradox docs/test
 
