@@ -52,9 +52,6 @@ jobs:
   minikube_try:
     machine:
       image: ubuntu-1604:201903-01
-    description: >-
-      Establishes the entire minikube environment on the machine, ready to perform
-      tests.
     steps:
       - checkout
       - kubernetes/install
