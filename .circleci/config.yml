@@ -72,18 +72,6 @@ jobs:
       - run: cd docs/src/test/js && npm test && cd -
       - save_sbt_cache
 
-  minikube_tests_orb:
-    orbs:
-      minikube: ccpgames/minikube@0.0.1
-    steps:
-      run: |
-        name: Add Operator
-        command: >-
-          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get |
-          bash &&
-          helm init --wait
-          name: Initialize Helm Tiller Service
-
   minikube_tests:
     machine:
       image: circleci/openjdk:8
