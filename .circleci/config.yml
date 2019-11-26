@@ -134,10 +134,10 @@ jobs:
             kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
             helm init --wait --service-account tiller
       - run:
-        name: DeplyCloudState
-        command: |
-          kubectl create namespace cloudstate
-          kubectl apply -n cloudstate -f operator/cloudstate-dev.yaml
+          name: DeplyCloudState
+          command: |
+            kubectl create namespace cloudstate
+            kubectl apply -n cloudstate -f operator/cloudstate-dev.yaml
       - run:
           name: VerifyCloudStateDeployment
           command: |
