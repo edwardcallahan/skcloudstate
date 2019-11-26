@@ -73,8 +73,7 @@ jobs:
       - save_sbt_cache
 
   minikube_tests:
-    docker:
-    - image: circleci/openjdk:8
+    machine: true
     environment:
       K8S_VERSION: v1.10.0
       KUBECONFIG: /home/circleci/.kube/config
@@ -97,8 +96,8 @@ jobs:
           name: setup kubectl
           command: |
             curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
-             mkdir -p ${HOME}/.kube
-             touch ${HOME}/.kube/config
+            mkdir -p ${HOME}/.kube
+            touch ${HOME}/.kube/config
       - run:
           name: setup minikube
           command: |
