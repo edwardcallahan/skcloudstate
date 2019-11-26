@@ -73,8 +73,8 @@ jobs:
       - save_sbt_cache
 
   minikube_tests:
-    machine:
-      image: circleci/classic:201808-01
+    docker:
+      image: circleci/openjdk:8
     environment:
       K8S_VERSION: v1.10.0
       KUBECONFIG: /home/circleci/.kube/config
