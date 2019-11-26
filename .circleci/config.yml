@@ -74,7 +74,7 @@ jobs:
 
   minikube_tests:
     machine:
-      image: circleci/openjdk:8
+      image: circleci/classic:201808-01
     environment:
       K8S_VERSION: v1.10.0
       KUBECONFIG: /home/circleci/.kube/config
