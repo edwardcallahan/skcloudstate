@@ -85,7 +85,7 @@ jobs:
       CHANGE_MINIKUBE_NONE_USER: true
     steps:
       - checkout
-      - sbtup_sbt
+      - setup_sbt
       - run:
           name: publishLocal
           command: |
