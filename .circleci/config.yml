@@ -1,4 +1,11 @@
 version: 2.1
+orbs:
+  # https://circleci.com/orbs/registry/orb/circleci/kubernetes
+  kubernetes: circleci/kubernetes@0.3.0
+  # https://circleci.com/orbs/registry/orb/circleci/helm
+  helm: circleci/helm@0.1.2
+  # https://circleci.com/orbs/registry/orb/ccpgames/minikube
+  minikube: ccpgames/minikube@0.0.1
 
 commands:
   setup_sbt:
@@ -42,6 +49,32 @@ commands:
 
 
 jobs:
+  minikube_try:
+    machine:
+      image: ubuntu-1604:201903-01
+    description: >-
+      Establishes the entire minikube environment on the machine, ready to perform
+      tests.
+    steps:
+      - checkout
+      - kubernetes/install
+      - minikube/minikube-install:
+          version: v1.2.0
+      - run:
+          # Create a minikube cluster to install helm charts into
+          name: create k8s cluster
+          command: sudo -E minikube start --vm-driver=none --cpus $(nproc) --memory 4096
+          environment:
+            CHANGE_MINIKUBE_NONE_USER: true
+      - run:
+          name: enable ingress
+          command: sudo minikube addons enable ingress
+      - run:
+          command: |
+            kubectl cluster-info
+            kubectl get po --all-namespaces
+      - setup_sbt
+
   format_checks:
     docker:
     - image: circleci/openjdk:8
@@ -151,4 +184,4 @@ workflows:
 
   build:
     jobs:
-      - minikube_tests
+      - minikube_try
