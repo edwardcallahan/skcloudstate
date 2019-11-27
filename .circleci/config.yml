@@ -71,6 +71,7 @@ jobs:
             kubectl cluster-info
             kubectl get po --all-namespaces
       - setup_sbt
+      - run: sbt -Ddocker.username=cloudstatedev -Ddocker.tag=dev -Duse.native.builds=false operator/docker:publishLocal operator/compileK8sDescriptors "dockerBuildAllNonNative publishLocal"
 
   format_checks:
     docker:
@@ -115,10 +116,7 @@ jobs:
     steps:
       - checkout
       - setup_sbt
-      - run:
-          name: publishLocal
-          command: |
-            sbt -Ddocker.username=cloudstatedev -Ddocker.tag=dev -Duse.native.builds=false operator/docker:publishLocal operator/compileK8sDescriptors "dockerBuildAllNonNative publishLocal"
+
       - run:
           name: checkDockerImages
           command: docker images
