@@ -75,7 +75,7 @@ jobs:
       - run:
           command: |
             kubectl create namespace cloudstate
-            kubectl apply -n cloudstate operator/cloudstate-dev.yaml
+            kubectl apply -n cloudstate -f operator/cloudstate-dev.yaml
       - run:
           command:
               if ! kubectl wait --for=condition=available --timeout=60s -n cloudstate deployment/cloudstate-operator
