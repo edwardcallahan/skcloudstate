@@ -72,6 +72,17 @@ jobs:
             kubectl get po --all-namespaces
       - setup_sbt
       - run: sbt -Ddocker.username=cloudstatedev -Ddocker.tag=dev -Duse.native.builds=false operator/docker:publishLocal operator/compileK8sDescriptors "dockerBuildAllNonNative publishLocal"
+      - run:
+          command: |
+            kubectl create namespace cloudstate
+            kubectl apply -n cloudstate operator/cloudstate-dev.yaml
+      - run:
+          command:
+              if ! kubectl wait --for=condition=available --timeout=60s -n cloudstate deployment/cloudstate-operator
+              then
+                kubectl describe -n cloudstate deployment/cloudstate-operator
+                kubectl logs -l app=cloudstate-operator -n cloudstate
+              fi
 
   format_checks:
     docker:
