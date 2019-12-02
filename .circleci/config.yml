@@ -103,7 +103,8 @@ jobs:
       - save_sbt_cache
 
   sbt-test-compile:
-    - image: circleci/openjdk:8
+    docker
+      - image: circleci/openjdk:8
     steps:
       - checkout
       - setup_sbt
