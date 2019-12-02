@@ -102,6 +102,14 @@ jobs:
       - run: sbt test
       - save_sbt_cache
 
+  sbt-test-compile:
+    - image: circleci/openjdk:8
+    steps:
+      - checkout
+      - setup_sbt
+      - run: sbt update test:compile
+      - save_sbt_cache
+
   doc_tests:
     docker:
       - image: ayltai/circleci-openjdk-node:jdk8-node10
@@ -127,7 +135,6 @@ jobs:
     steps:
       - checkout
       - setup_sbt
-
       - run:
           name: checkDockerImages
           command: docker images
@@ -190,4 +197,4 @@ workflows:
 
   build:
     jobs:
-      - minikube_try
+      - sbt-test-compile
