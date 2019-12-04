@@ -53,9 +53,8 @@ jobs:
     docker:
       - image: shopstic/circleci-graalvm-sbt
      steps:
-       - checkout
-       - run: sbt dockerBuildNativeInMemory publishLocal
-
+     - checkout
+     - run: sbt dockerBuildNativeInMemory publishLocal
 
   minikube_try:
     machine:
