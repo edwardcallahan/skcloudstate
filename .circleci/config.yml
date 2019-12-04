@@ -50,17 +50,31 @@ commands:
 
 jobs:
   native-image:
-    docker:
-    - image: shopstic/circleci-graalvm-sbt:1.1.5
+    machine:
+      image: ubuntu-1604:201903-01
 #    environment:
 #      SBT_OPTS: -Xms512M -Xmx1024M -Xss2M -XX:MaxMetaspaceSize=2G
     steps:
     - checkout
+    - setup_sbt
     - run:
         name: native build
         command: sbt 'dockerBuildNativeInMemory publishLocal'
         timeout: 20m
         no_output_timeout: 15m
+
+  native-image2:
+    docker:
+      - image: shopstic/circleci-graalvm-sbt:1.1.5
+    #    environment:
+    #      SBT_OPTS: -Xms512M -Xmx1024M -Xss2M -XX:MaxMetaspaceSize=2G
+    steps:
+      - checkout
+      - run:
+          name: native build
+          command: sbt 'dockerBuildNativeInMemory publishLocal'
+          timeout: 20m
+          no_output_timeout: 15m
 
   minikube_try:
     machine:
