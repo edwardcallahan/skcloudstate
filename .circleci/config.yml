@@ -65,11 +65,12 @@ jobs:
 
   native-image:
     docker:
-      - image: shopstic/circleci-graalvm-sbt:1.1.5
+      - image: openjdk:8
         environment:
           SBT_OPTS: -Xms1024M -Xmx1024M -Xss2M -XX:MaxMetaspaceSize=2G
     steps:
       - checkout
+      - setup_sbt
       - run:
           name: native build
           command: sbt 'dockerBuildNativeInMemory publishLocal'
