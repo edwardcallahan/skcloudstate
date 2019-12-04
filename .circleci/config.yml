@@ -51,10 +51,10 @@ commands:
 jobs:
   native-image:
     docker:
-      - image: shopstic/circleci-graalvm-sbt
-     steps:
-     - checkout
-     - run: sbt dockerBuildNativeInMemory publishLocal
+    - image: shopstic/circleci-graalvm-sbt
+    steps:
+    - checkout
+    - run: sbt dockerBuildNativeInMemory publishLocal
 
   minikube_try:
     machine:
