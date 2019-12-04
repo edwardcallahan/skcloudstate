@@ -316,7 +316,9 @@ def sharedNativeImageSettings(targetDir: File) = Seq(
   "--enable-url-protocols=http,https",
   "--allow-incomplete-classpath",
   "--no-fallback",
-  "--initialize-at-build-time"
+  "--initialize-at-build-time",
+  "-J-Xmx1g",
+   "-J-Xms1g"
   + Seq(
     "org.slf4j",
     "scala",
