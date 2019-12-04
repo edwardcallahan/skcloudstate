@@ -19,7 +19,7 @@ commands:
         name: Install SBT
         command: |
           curl -L -o sbt-<< parameters.version >>.deb https://dl.bintray.com/sbt/debian/sbt-<< parameters.version >>.deb
-          dpkg -i sbt-<< parameters.version >>.deb
+          sudo dpkg -i sbt-<< parameters.version >>.deb
           rm sbt-<< parameters.version >>.deb
     - restore_cache:
         key: sbt-cache-2
@@ -49,21 +49,24 @@ commands:
 
 
 jobs:
-  native-image2:
+  native-image:
     machine:
-      image: ubuntu-1604:201903-01
-#    environment:
-#      SBT_OPTS: -Xms512M -Xmx1024M -Xss2M -XX:MaxMetaspaceSize=2G
+#      image: ubuntu-1604:201903-01
+      docker_layer_caching: true    # default - false
     steps:
     - checkout
     - setup_sbt
+    - run:
+        name: Setup Bash Env
+        command: |
+          echo 'export SBT_OPTS="-Xms1024M -Xmx1024M -Xss2M -XX:MaxMetaspaceSize=2G"' >> $BASH_ENV
     - run:
         name: native build
         command: sbt 'dockerBuildNativeInMemory publishLocal'
         timeout: 20m
         no_output_timeout: 15m
 
-  native-image:
+  native-image2:
     docker:
       - image: openjdk:8
         environment:
@@ -114,7 +117,7 @@ jobs:
 
   format_checks:
     docker:
-    - image: circleci/openjdk:8
+    - image: oracle/graalvm-ce:latest
     steps:
     - checkout
     - setup_sbt
