@@ -51,7 +51,7 @@ commands:
 jobs:
   native-image:
     docker:
-    - image: shopstic/circleci-graalvm-sbt
+    - image: shopstic/circleci-graalvm-sbt:1.1.5
     steps:
     - checkout
     - run: sbt dockerBuildNativeInMemory publishLocal
