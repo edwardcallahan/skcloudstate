@@ -59,7 +59,7 @@ jobs:
     - run:
         name: Setup Bash Env
         command: |
-          echo 'export SBT_OPTS="-Xms1024M -Xmx1024M -Xss2M -XX:MaxMetaspaceSize=2G"' >> $BASH_ENV
+          echo 'export SBT_OPTS="-Xms4G -Xmx4G -Xss2M -XX:MaxMetaspaceSize=4G"' >> $BASH_ENV
     - run:
         name: native build
         command: sbt 'dockerBuildNativeInMemory publishLocal'
@@ -70,7 +70,7 @@ jobs:
     docker:
       - image: shopstic/circleci-graalvm-sbt:1.1.5
         environment:
-          SBT_OPTS: -Xms1024M -Xmx1024M -Xss2M -XX:MaxMetaspaceSize=2G
+          SBT_OPTS: -Xms4G -Xmx4G -Xss2M -XX:MaxMetaspaceSize=4G
     steps:
       - checkout
       - setup_sbt
