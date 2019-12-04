@@ -68,7 +68,7 @@ jobs:
 
   native-image2:
     docker:
-      - image: openjdk:8
+      - image: shopstic/circleci-graalvm-sbt:1.1.5
         environment:
           SBT_OPTS: -Xms1024M -Xmx1024M -Xss2M -XX:MaxMetaspaceSize=2G
     steps:
