@@ -49,6 +49,14 @@ commands:
 
 
 jobs:
+  native-image:
+    docker:
+      - image: shopstic/circleci-graalvm-sbt
+     steps:
+       - checkout
+       - run: sbt dockerBuildNativeInMemory publishLocal
+
+
   minikube_try:
     machine:
       image: ubuntu-1604:201903-01
@@ -198,4 +206,4 @@ workflows:
 
   build:
     jobs:
-      - sbt-test-compile
+      - native-image
