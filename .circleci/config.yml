@@ -70,6 +70,7 @@ jobs:
     docker:
       - image: shopstic/circleci-graalvm-sbt:1.1.5
         environment:
+          _JAVA_OPTIONS: "-Xms4G -Xmx4G "
           SBT_OPTS: -Xms4G -Xmx4G -Xss2M -XX:MaxMetaspaceSize=4G
     steps:
       - checkout
