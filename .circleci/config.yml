@@ -19,7 +19,7 @@ commands:
         name: Install SBT
         command: |
           curl -L -o sbt-<< parameters.version >>.deb https://dl.bintray.com/sbt/debian/sbt-<< parameters.version >>.deb
-          sudo dpkg -i sbt-<< parameters.version >>.deb
+          dpkg -i sbt-<< parameters.version >>.deb
           rm sbt-<< parameters.version >>.deb
     - restore_cache:
         key: sbt-cache-2
