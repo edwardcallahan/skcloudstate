@@ -317,8 +317,8 @@ def sharedNativeImageSettings(targetDir: File) = Seq(
   "--allow-incomplete-classpath",
   "--no-fallback",
   "--initialize-at-build-time",
-  "-J-Xmx1g",
-   "-J-Xms1g"
+  "-J-Xmx4g",
+   "-J-Xms4g"
   + Seq(
     "org.slf4j",
     "scala",
