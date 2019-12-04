@@ -54,7 +54,11 @@ jobs:
     - image: shopstic/circleci-graalvm-sbt:1.1.5
     steps:
     - checkout
-    - run: sbt 'dockerBuildNativeInMemory publishLocal'
+    - run:
+        name: native build
+        command: sbt 'dockerBuildNativeInMemory publishLocal'
+        timeout: 20m
+        no_output_timeout: 15m
 
   minikube_try:
     machine:
