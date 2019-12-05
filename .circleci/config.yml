@@ -62,7 +62,7 @@ jobs:
           echo 'export SBT_OPTS="-Xms4G -Xmx4G -Xss2M -XX:MaxMetaspaceSize=4G"' >> $BASH_ENV
     - run:
         name: native build
-        command: sbt -m 4800 'dockerBuildNativeInMemory publishLocal'
+        command: SBT_OPTS="-Xms4G -Xmx4G -Xss2M -XX:MaxMetaspaceSize=4G" sbt  'dockerBuildNativeInMemory publishLocal'
         timeout: 20m
         no_output_timeout: 15m
 
