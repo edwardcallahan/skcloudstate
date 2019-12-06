@@ -56,7 +56,7 @@ jobs:
     steps:
     - checkout
     - setup_sbt
- - run:
+    - run:
         name: machine update
         no_output_timeout: 10m
         command:
