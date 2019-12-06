@@ -360,7 +360,6 @@ def sharedNativeImageSettings(targetDir: File) = Seq(
   //  "--no-server", // Uncomment to not use the native-image build server, to avoid potential cache problems with builds
   //"--report-unsupported-elements-at-runtime", // Hopefully a self-explanatory flag
   "--enable-url-protocols=http,https",
-  "--allow-incomplete-classpath",
   "--no-fallback",
   "--initialize-at-build-time",
   "-J-Xmx4g",
