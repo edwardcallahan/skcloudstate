@@ -50,23 +50,13 @@ commands:
 
 jobs:
   native-image:
-    machine:
-#      image: ubuntu-1604:201903-01
-      docker_layer_caching: false    # default - false
+    machine: true
+    resource_class: large
+#   image: ubuntu-1604:201903-01
+    docker_layer_caching: false    # default - false
     steps:
     - checkout
     - setup_sbt
-    - run:
-        name: machine update
-        no_output_timeout: 10m
-        command:
-          set -e
-          killall apt-get
-          apt-get -q -y update
-          apt-get -q -y upgrade
-          apt-get -q -y install build-essential
-          apt-get -q -y install libz-dev
-          apt-get -q -y install zlib1g-dev
     - run:
         name: Setup Bash Env
         command: |
@@ -94,7 +84,8 @@ jobs:
 
   minikube_try:
     machine:
-      image: ubuntu-1604:201903-01 -
+      image: ubuntu-1604:201903-01
+    resource_class: large
     steps:
       - checkout
       - kubernetes/install
