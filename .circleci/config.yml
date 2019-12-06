@@ -63,6 +63,7 @@ jobs:
           set -e
           killall apt-get
           apt-get -q -y update
+          apt-get -q -y upgrade
           apt-get -q -y install build-essential
           apt-get -q -y install libz-dev
           apt-get -q -y install zlib1g-dev
