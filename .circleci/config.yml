@@ -56,6 +56,16 @@ jobs:
     steps:
     - checkout
     - setup_sbt
+ - run:
+        name: machine update
+        no_output_timeout: 10m
+        command:
+          set -e
+          killall apt-get
+          apt-get -q -y update
+          apt-get -q -y install build-essential
+          apt-get -q -y install libz-dev
+          apt-get -q -y install zlib1g-dev
     - run:
         name: Setup Bash Env
         command: |
