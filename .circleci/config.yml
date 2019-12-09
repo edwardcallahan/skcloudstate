@@ -51,7 +51,7 @@ commands:
 jobs:
   native-image:
     machine: true
-    resource_class: large
+    resource_class: x-large
 #   image: ubuntu-1604:201903-01
 #    docker_layer_caching: false    # default - false
     steps:
