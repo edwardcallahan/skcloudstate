@@ -64,7 +64,8 @@ jobs:
           set -e
           killall apt-get
           apt-get -q -y update
-          apt-get -q -y upgrade
+          apt-get install -q -y default-jdk
+          cat /etc/*release
     - run:
         name: Setup Bash Env
         command: |
