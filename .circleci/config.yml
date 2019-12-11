@@ -64,7 +64,8 @@ jobs:
           set -e
           sudo killall apt-get
           sudo apt-get install -q -y software-properties-common
-          curl -fsSL https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+          wget -qO adopt.key - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public
+          sudo apt-key add adopt.key
           sudo apt-get -q -y update
     - run:
         name: install adoptopenjdk-11-openj9
