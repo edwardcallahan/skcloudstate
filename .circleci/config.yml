@@ -55,8 +55,6 @@ jobs:
 #   image: ubuntu-1604:201903-01
 #    docker_layer_caching: false    # default - false
     steps:
-    - checkout
-    - setup_sbt
     - run:
         name: remove default-jdk
         no_output_timeout: 5m
@@ -89,6 +87,8 @@ jobs:
           echo 'export JAVA_HOME="/usr/lib/jvm/adoptopenjdk-11-openj9-amd64/"' >> $BASH_ENV
           echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV
           echo 'export SBT_OPTS="-Xms4G -Xmx4G -Xss2M -XX:MaxMetaspaceSize=4G"' >> $BASH_ENV
+    - checkout
+    - setup_sbt
     - run:
         name: native build
         command: sbt 'dockerBuildNativeInMemory publishLocal'
