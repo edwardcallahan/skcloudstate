@@ -64,10 +64,10 @@ jobs:
           set -e
           sudo killall apt-get
           sudo apt-get install -q -y software-properties-common
-          wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+          curl -fsSL https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
           sudo apt-get -q -y update
     - run:
-        name: machine update
+        name: install adoptopenjdk-11-openj9
         no_output_timeout: 10m
         command:
           set -e
