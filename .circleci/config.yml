@@ -80,7 +80,7 @@ jobs:
         name: Setup Bash Env
         command: |
           echo 'export JAVA_HOME="/usr/lib/jvm/adoptopenjdk-11-openj9-amd64/"' >> $BASH_ENV
-          echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV'
+          echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV
           echo 'export SBT_OPTS="-Xms4G -Xmx4G -Xss2M -XX:MaxMetaspaceSize=4G"' >> $BASH_ENV
     - run:
         name: native build
