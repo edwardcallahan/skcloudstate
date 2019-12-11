@@ -63,9 +63,11 @@ jobs:
         command:
           set -e
           killall apt-get
+          apt-get install -q -y software-properties-common
+          wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+          add-apt-repository -y https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
           apt-get -q -y update
-          apt-get install -q -y default-jdk
-          cat /etc/*release
+          apt-get install -q -y adoptopenjdk-11-openj9/xenial
     - run:
         name: Setup Bash Env
         command: |
