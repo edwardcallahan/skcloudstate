@@ -97,9 +97,18 @@ jobs:
 
   native-image-docker:
     docker:
-      - image: hseeberger/scala-sbt:8u222_1.3.4_2.13.1
+      - image: ubuntu:latest
     resource_class: xlarge
     steps:
+      - run:
+          name: setup java and sbt
+          command: |
+            apt update
+            apt install default-jre -yqq
+            apt install curl -yqq
+            curl -L -o sbt-1.3.3.deb https://dl.bintray.com/sbt/debian/sbt-1.3.3.deb
+            dpkg -i sbt-1.3.3.deb
+            sbt sbtVersion
       - run:
           name: Setup Bash Env
           command: |
