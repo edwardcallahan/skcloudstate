@@ -97,7 +97,7 @@ jobs:
 
   native-image-docker:
     docker:
-      - image: openjdk
+      - image: hseeberger/scala-sbt
     resource_class: xlarge
     steps:
       - run:
@@ -107,7 +107,6 @@ jobs:
             echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV
             echo 'export SBT_OPTS="-Xms4G -Xmx4G -Xss2M -XX:MaxMetaspaceSize=4G"' >> $BASH_ENV
       - checkout
-      - setup_sbt
       - run:
           name: native build
           command: sbt 'dockerBuildNativeInMemory publishLocal'
