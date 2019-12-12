@@ -96,10 +96,12 @@ jobs:
         no_output_timeout: 15m
 
   native-image-docker:
+    working_directory: /tmp
     docker:
       - image: ubuntu:latest
     resource_class: xlarge
     steps:
+      - checkout
       - run:
           name: setup java and sbt
           command: |
@@ -115,7 +117,6 @@ jobs:
             echo 'export JAVA_HOME="/usr/lib/jvm/adoptopenjdk-11-openj9-amd64/"' >> $BASH_ENV
             echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV
             echo 'export SBT_OPTS="-Xms4G -Xmx4G -Xss2M -XX:MaxMetaspaceSize=4G"' >> $BASH_ENV
-      - checkout
       - run:
           name: native build
           command: sbt 'dockerBuildNativeInMemory publishLocal'
@@ -272,4 +273,5 @@ workflows:
 
   build:
     jobs:
-      - native-image-docker
+      - sbt-test-compile
+#      - native-image-docker
