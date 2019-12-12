@@ -357,12 +357,12 @@ def sharedNativeImageSettings(targetDir: File) = Seq(
   "-H:-NativeArchitecture", // if "+" Compiles the native image to customize to the local CPU arch
   "-H:Class=" + "io.cloudstate.proxy.CloudStateProxyMain",
   "--verbose",
-  //  "--no-server", // Uncomment to not use the native-image build server, to avoid potential cache problems with builds
+  "--no-server", // Uncomment to not use the native-image build server, to avoid potential cache problems with builds
   //"--report-unsupported-elements-at-runtime", // Hopefully a self-explanatory flag
   "--enable-url-protocols=http,https",
   "--allow-incomplete-classpath",
   "--no-fallback",
-  "--initialize-at-build-time",
+  "--initialize-at-build-time"
   "-J-Xmx4g",
    "-J-Xms4g"
   + Seq(
