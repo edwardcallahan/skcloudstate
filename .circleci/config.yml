@@ -97,7 +97,7 @@ jobs:
 
   native-image-docker:
     docker:
-      - image: hseeberger/scala-sbt
+      - image: hseeberger/scala-sbt:8u222_1.3.4_2.13.1
     resource_class: xlarge
     steps:
       - run:
