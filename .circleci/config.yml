@@ -96,21 +96,21 @@ jobs:
         no_output_timeout: 15m
 
   native-image-docker:
-    working_directory: /tmp
     docker:
-      - image: ubuntu:latest
+      - image: circleci/openjdk:8
     resource_class: xlarge
     steps:
       - checkout
-      - run:
-          name: setup java and sbt
-          command: |
-            apt update
-            apt install default-jre -yqq
-            apt install curl -yqq
-            curl -L -o sbt-1.3.3.deb https://dl.bintray.com/sbt/debian/sbt-1.3.3.deb
-            dpkg -i sbt-1.3.3.deb
-            sbt sbtVersion
+      - setup_sbt
+#      - run:
+#          name: setup java and sbt
+#          command: |
+#            apt update
+#            apt install default-jre -yqq
+#            apt install curl -yqq
+#            curl -L -o sbt-1.3.3.deb https://dl.bintray.com/sbt/debian/sbt-1.3.3.deb
+#            dpkg -i sbt-1.3.3.deb
+#            sbt sbtVersion
       - run:
           name: Setup Bash Env
           command: |
@@ -119,7 +119,7 @@ jobs:
             echo 'export SBT_OPTS="-Xms4G -Xmx4G -Xss2M -XX:MaxMetaspaceSize=4G"' >> $BASH_ENV
       - run:
           name: native build
-          command: sbt 'dockerBuildNativeInMemory publishLocal'
+          command: sbt update 'dockerBuildNativeInMemory publishLocal'
           timeout: 20m
           no_output_timeout: 15m
 
@@ -273,5 +273,5 @@ workflows:
 
   build:
     jobs:
-      - sbt-test-compile
-#      - native-image-docker
+#      - sbt-test-compile
+      - native-image-docker
